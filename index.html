@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tribal Weave Archive of the Philippines</title>
+    <meta name="description" content="NCIP / IPRA cultural heritage repository of Philippine Indigenous textiles, bark cloth and plaited fiber.">
+
+    <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        heritage: {
+                            50: '#FAF7F2',
+                            100: '#F2EAE1',
+                            200: '#E5D5C5',
+                            300: '#D5B9A1',
+                            400: '#BC9374',
+                            500: '#A37350',
+                            600: '#8B5D3C',
+                            700: '#6F472F',
+                            800: '#583826',
+                            900: '#472D1F',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'Georgia', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="min-h-screen flex flex-col items-center antialiased py-2 sm:py-5">
+
+    <!-- Main Container Frame -->
+    <div class="w-full max-w-[1440px] bg-[#FAF7F2] min-h-screen shadow-lg border border-[#E5D5C5] flex flex-col rounded-none sm:rounded-3xl overflow-clip">
+
+        <!-- Indigenous Textile Geometric Top Strip -->
+        <div class="weave-pattern-strip"></div>
+
+        <!-- ===================================================================
+             HEADER A: LANDING / AUTH HEADER (Shown on Landing, Login, Register)
+             =================================================================== -->
+        <header id="landingHeader" class="sticky top-0 z-40 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E5D5C5]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+                <div onclick="navigateTo('landing')" class="flex items-center space-x-3.5 cursor-pointer">
+                    <div class="w-11 h-11 rounded-2xl bg-[#8B5D3C] flex items-center justify-center text-[#FAF7F2] font-bold text-xl font-serif shadow-sm">
+                        T
+                    </div>
+                    <div>
+                        <h1 class="text-sm sm:text-base font-bold text-[#472D1F] font-serif leading-snug">
+                            Tribal Weave Archive of the Philippines
+                        </h1>
+                        <p class="text-[11px] text-[#6F472F] font-medium">
+                            NCIP / IPRA Cultural Heritage Repository
+                        </p>
+                    </div>
+                </div>
+
+                <div id="landingAuthUser" class="hidden items-center space-x-2.5">
+                    <button onclick="navigateTo('home')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-[#FAF7F2] bg-[#8B5D3C] hover:bg-[#6F472F] transition shadow-sm">
+                        Open Archive
+                    </button>
+                </div>
+                <div id="landingAuthGuest" class="flex items-center space-x-2.5">
+                    <button onclick="navigateTo('login')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-[#472D1F] bg-[#F2EAE1] hover:bg-[#E5D5C5] transition">
+                        Log In
+                    </button>
+                    <button onclick="navigateTo('register')" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold text-[#FAF7F2] bg-[#8B5D3C] hover:bg-[#6F472F] transition shadow-sm">
+                        Sign Up
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- ===================================================================
+             HEADER B: MAIN 4-ITEM NAVIGATION BAR (HOME, WEAVES, TRIBES, PROFILE)
+             Strictly 4 items — Logout is located inside the Profile page.
+             =================================================================== -->
+        <header id="mainNavHeader" class="hidden sticky top-0 z-40 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E5D5C5]">
+            <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+                <div onclick="navigateTo('home')" class="flex items-center space-x-3.5 cursor-pointer group">
+                    <div class="w-11 h-11 rounded-2xl bg-[#8B5D3C] group-hover:bg-[#6F472F] transition flex items-center justify-center text-[#FAF7F2] font-bold text-xl font-serif shadow-sm">
+                        T
+                    </div>
+                    <div>
+                        <span class="block text-sm sm:text-base font-bold text-[#472D1F] font-serif leading-snug">
+                            Tribal Weave Archive
+                        </span>
+                        <span class="block text-[11px] text-[#6F472F] font-medium">
+                            Philippine Indigenous Textile Repository
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation (Strictly 4 Main Items) -->
+                <nav class="hidden md:flex items-center space-x-2" aria-label="Main Navigation">
+                    <button onclick="navigateTo('home')" id="nav-home" class="nav-link">HOME</button>
+                    <button onclick="navigateTo('weaves')" id="nav-weaves" class="nav-link">WEAVES</button>
+                    <button onclick="navigateTo('tribes')" id="nav-tribes" class="nav-link">TRIBES</button>
+                    <button onclick="navigateTo('profile')" id="nav-profile" class="nav-link">PROFILE</button>
+                </nav>
+
+                <!-- Mobile Hamburger Button -->
+                <button type="button" onclick="toggleMobileMenu()" class="md:hidden p-2.5 rounded-xl bg-[#F2EAE1] text-[#472D1F] border border-[#E5D5C5]" aria-label="Toggle Menu">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Drawer (Strictly 4 Main Items) -->
+            <nav id="mobileNavDrawer" class="hidden md:hidden border-t border-[#E5D5C5] bg-[#FAF7F2] px-4 py-3 space-y-1.5">
+                <button onclick="navigateTo('home'); closeMobileMenu();" id="mnav-home" class="w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold text-[#472D1F]">HOME</button>
+                <button onclick="navigateTo('weaves'); closeMobileMenu();" id="mnav-weaves" class="w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold text-[#472D1F]">WEAVES</button>
+                <button onclick="navigateTo('tribes'); closeMobileMenu();" id="mnav-tribes" class="w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold text-[#472D1F]">TRIBES</button>
+                <button onclick="navigateTo('profile'); closeMobileMenu();" id="mnav-profile" class="w-full text-left px-4 py-2.5 rounded-xl text-xs font-bold text-[#472D1F]">PROFILE</button>
+            </nav>
+        </header>
+
+        <!-- Global Toast Notification Banner -->
+        <div id="toastBanner" role="status" aria-live="polite" class="hidden toast-banner mx-4 sm:mx-8 mt-4 p-4 rounded-2xl text-xs font-semibold flex items-center justify-between shadow-sm sticky top-24 z-50">
+            <span id="toastMessage"></span>
+            <button type="button" onclick="hideToast()" aria-label="Dismiss notification" class="font-bold ml-4 text-base leading-none">&times;</button>
+        </div>
+
+        <!-- ===================================================================
+             VIEW 1: INFORMATIONAL LANDING PAGE
+             =================================================================== -->
+        <div id="view-landing" class="view-section flex-1">
+            <!-- Hero Section -->
+            <section class="py-12 sm:py-16 px-4 sm:px-8 border-b border-[#E5D5C5] bg-gradient-to-b from-white to-[#FAF7F2]">
+                <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                    <div class="lg:col-span-7 space-y-6">
+                        <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F2EAE1] text-[#6F472F] text-xs font-semibold border border-[#E5D5C5]">
+                            <i data-lucide="shield-check" class="w-4 h-4 text-[#8B5D3C]"></i>
+                            NCIP / IPRA Cultural Heritage Digital Archive
+                        </span>
+                        <h2 class="text-3xl sm:text-5xl font-bold text-[#472D1F] font-serif leading-tight">
+                            Preserving the Sacred Threads of Philippine Ancestral Weaves
+                        </h2>
+                        <p class="text-[#6F472F] text-sm sm:text-base leading-relaxed max-w-2xl">
+                            Welcome to the <strong>Tribal Weave Archive of the Philippines</strong>—an organized, respectful digital sanctuary safeguarding the living textile traditions, bark cloth artistry, and plaited fiber heritage of Indigenous Cultural Communities across Luzon, Visayas &amp; Mindoro, and Mindanao &amp; Sulu.
+                        </p>
+
+                        <div class="flex flex-wrap items-center gap-3.5 pt-2">
+                            <button onclick="navigateTo('home')" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-[#8B5D3C] hover:bg-[#6F472F] text-[#FAF7F2] text-sm font-semibold transition shadow-sm">
+                                <span>Explore Our Heritage</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                            </button>
+                            <button type="button" onclick="scrollToAbout()" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-white hover:bg-[#F2EAE1] text-[#472D1F] border border-[#E5D5C5] text-sm font-semibold transition">
+                                <span>Learn More</span>
+                                <i data-lucide="book-open" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-4 pt-4 max-w-lg">
+                            <div class="p-3.5 rounded-2xl bg-white border border-[#E5D5C5] text-center">
+                                <div class="text-xl font-bold text-[#8B5D3C] font-serif" id="landingStatWeaves">24</div>
+                                <div class="text-[11px] text-[#6F472F] font-semibold uppercase tracking-wider">Cataloged Weaves</div>
+                            </div>
+                            <div class="p-3.5 rounded-2xl bg-white border border-[#E5D5C5] text-center">
+                                <div class="text-xl font-bold text-[#472D1F] font-serif">110+</div>
+                                <div class="text-[11px] text-[#6F472F] font-semibold uppercase tracking-wider">Ethnolinguistic Groups</div>
+                            </div>
+                            <div class="p-3.5 rounded-2xl bg-white border border-[#E5D5C5] text-center">
+                                <div class="text-xl font-bold text-[#472D1F] font-serif">3</div>
+                                <div class="text-[11px] text-[#6F472F] font-semibold uppercase tracking-wider">Craft Mediums</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Attractive Images of Philippine Indigenous Textiles -->
+                    <div class="lg:col-span-5 grid grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <div class="heritage-card p-3 bg-[#F2EAE1]">
+                                <img src="Tnalak.png" data-fallback="T'nalak Abaca Ikat" alt="T'nalak Sacred Cloth" class="w-full h-44 object-cover rounded-xl">
+                                <p class="text-xs font-serif font-bold text-[#472D1F] mt-2 px-1">T'nalak Abaca Ikat &bull; T'boli</p>
+                            </div>
+                            <div class="heritage-card p-3 bg-[#F2EAE1]">
+                                <img src="Inabel.png" data-fallback="Inabel & Gammit" alt="Ifugao Inabel" class="w-full h-36 object-cover rounded-xl">
+                                <p class="text-xs font-serif font-bold text-[#472D1F] mt-2 px-1">Inabel &amp; Gammit &bull; Ifugao</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4 pt-6">
+                            <div class="heritage-card p-3 bg-[#F2EAE1]">
+                                <img src="Seputangan.png" data-fallback="Seputangan Tapestry" alt="Yakan Seputangan" class="w-full h-36 object-cover rounded-xl">
+                                <p class="text-xs font-serif font-bold text-[#472D1F] mt-2 px-1">Seputangan &bull; Yakan</p>
+                            </div>
+                            <div class="heritage-card p-3 bg-[#F2EAE1]">
+                                <img src="Maranao.png" data-fallback="Inaul & Langkit" alt="Maranao Inaul" class="w-full h-44 object-cover rounded-xl">
+                                <p class="text-xs font-serif font-bold text-[#472D1F] mt-2 px-1">Inaul &amp; Langkit &bull; Maranao</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About the Website -->
+            <section id="landing-about" class="py-14 px-4 sm:px-8 border-b border-[#E5D5C5]">
+                <div class="max-w-7xl mx-auto space-y-10">
+                    <div class="max-w-3xl mx-auto text-center space-y-3">
+                        <span class="text-xs font-bold uppercase tracking-widest text-[#A37350]">About the Website</span>
+                        <h3 class="text-2xl sm:text-4xl font-bold text-[#472D1F] font-serif">
+                            Safeguarding Indigenous Weaving Traditions &amp; Cultural Ethics
+                        </h3>
+                        <p class="text-sm text-[#6F472F] leading-relaxed">
+                            Indigenous textiles are living historical documents that carry ancestral memory, ecological knowledge of botanical dyes, and sacred spiritual prayers. Preserving these traditions protects endangered cultural identities from commercial misappropriation and extinction.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="heritage-card p-6 space-y-3">
+                            <div class="w-10 h-10 rounded-xl bg-[#F2EAE1] text-[#8B5D3C] flex items-center justify-center">
+                                <i data-lucide="layers" class="w-5 h-5"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-[#472D1F] font-serif">Three Craft Mediums</h4>
+                            <ul class="text-xs text-[#6F472F] space-y-2 leading-relaxed">
+                                <li><strong>1. Textiles:</strong> Backstrap and pedal-loom fabrics woven from fine abaca, hand-spun native cotton, and silk using warp-ikat and tapestry techniques.</li>
+                                <li><strong>2. Bark Cloth:</strong> Ancient non-woven garments (<em>Tinukpuk</em> and <em>Akfè</em>) crafted by harvesting and beating <em>Ficus</em> and <em>Artocarpus</em> inner tree bark.</li>
+                                <li><strong>3. Plaited Fiber:</strong> Sacred ritual basketry and sleeping mats (<em>Tingkop</em>, <em>Tepoh</em>, and <em>Gabe</em>) hand-plaited from buri, pandan, and smoked bamboo.</li>
+                            </ul>
+                        </div>
+
+                        <div class="heritage-card p-6 space-y-3">
+                            <div class="w-10 h-10 rounded-xl bg-[#F2EAE1] text-[#8B5D3C] flex items-center justify-center">
+                                <i data-lucide="map" class="w-5 h-5"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-[#472D1F] font-serif">Geographical &amp; Cultural Scope</h4>
+                            <ul class="text-xs text-[#6F472F] space-y-2 leading-relaxed">
+                                <li><strong>Luzon:</strong> Ifugao, Ibaloi, Bugkalot/Ilongot, Agta/Dumagat, Balangao, Kalinga, Bontoc, and Gaddang weavers.</li>
+                                <li><strong>Visayas &amp; Mindoro:</strong> Hanunó'o Mangyan, Suludnon (Panay Bukidnon), Tagbanwa &amp; Palaw'an, and Magahat/Karol-an communities.</li>
+                                <li><strong>Mindanao &amp; Sulu:</strong> T'boli, Yakan, Maranao, Mandaya, Subanen, Teduray, Banwaon, Erumanen Manobo, B'laan, Bagobo Tagabawa, Tausūg, and Samal/Badjao.</li>
+                            </ul>
+                        </div>
+
+                        <div class="heritage-card p-6 space-y-3">
+                            <div class="w-10 h-10 rounded-xl bg-[#F2EAE1] text-[#8B5D3C] flex items-center justify-center">
+                                <i data-lucide="scale" class="w-5 h-5"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-[#472D1F] font-serif">Cultural Ethics &amp; IP Protection</h4>
+                            <p class="text-xs text-[#6F472F] leading-relaxed">
+                                Guided by the <strong>Indigenous Peoples' Rights Act (RA 8371)</strong>, this archive respects community ownership of traditional motifs and cultural knowledge.
+                            </p>
+                            <p class="text-xs text-[#6F472F] leading-relaxed">
+                                Member submissions are held in a strict <strong>PENDING</strong> state until an Admin verifies documentation sources and Free and Prior Informed Consent (FPIC).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Featured Collection on Landing Page -->
+            <section class="py-14 px-4 sm:px-8 border-b border-[#E5D5C5] bg-[#F2EAE1]/50">
+                <div class="max-w-7xl mx-auto space-y-8">
+                    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-[#A37350]">Selected Specimens</span>
+                            <h3 class="text-2xl sm:text-3xl font-bold text-[#472D1F] font-serif">Featured Archival Collection</h3>
+                        </div>
+                        <button onclick="navigateTo('weaves')" class="inline-flex items-center gap-1.5 text-xs font-semibold text-[#8B5D3C] hover:text-[#472D1F]">
+                            <span>Explore Full Collection</span>
+                            <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                        </button>
+                    </div>
+
+                    <div id="landingFeaturedGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Populated dynamically from the 24 records -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Login, Registration & Guest Access -->
+            <section class="py-14 px-4 sm:px-8">
+                <div class="max-w-4xl mx-auto heritage-card p-8 sm:p-10 bg-white text-center space-y-6">
+                    <h3 class="text-2xl sm:text-3xl font-bold text-[#472D1F] font-serif">
+                        Enter the Tribal Weave Archive
+                    </h3>
+                    <p class="text-xs sm:text-sm text-[#6F472F] max-w-xl mx-auto leading-relaxed">
+                        Log in as an Admin or Member to contribute and review field documentation, sign up for a new Member account, or browse all verified records immediately as a Guest.
+                    </p>
+                    <div id="landingCtaButtons" class="flex flex-wrap justify-center gap-4 pt-2">
+                        <button onclick="navigateTo('login')" class="px-6 py-3 rounded-2xl bg-[#8B5D3C] hover:bg-[#6F472F] text-[#FAF7F2] text-xs sm:text-sm font-semibold transition shadow-sm">
+                            Log In
+                        </button>
+                        <button onclick="navigateTo('register')" class="px-6 py-3 rounded-2xl bg-[#F2EAE1] hover:bg-[#E5D5C5] text-[#472D1F] text-xs sm:text-sm font-semibold transition">
+                            Sign Up
+                        </button>
+                        <button onclick="continueAsGuest()" class="px-6 py-3 rounded-2xl bg-white hover:bg-[#FAF7F2] text-[#6F472F] border border-[#E5D5C5] text-xs sm:text-sm font-semibold transition">
+                            Continue as Guest
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- ===================================================================
+             VIEW 2: LOGIN PAGE
+             =================================================================== -->
+        <div id="view-login" class="view-section hidden flex-1 flex items-center justify-center p-4 sm:p-10">
+            <div class="w-full max-w-md heritage-card bg-white p-7 sm:p-9 space-y-6">
+                <div class="text-center space-y-2">
+                    <div class="inline-flex w-12 h-12 rounded-2xl bg-[#8B5D3C] text-[#FAF7F2] items-center justify-center font-serif font-bold text-2xl shadow-sm">
+                        T
+                    </div>
+                    <h2 class="text-2xl font-bold text-[#472D1F] font-serif">Log In to Archive</h2>
+                    <p class="text-xs text-[#6F472F]">Redirects automatically based on your role (Admin, Member, or Guest)</p>
+                </div>
+
+                <div id="loginErrorBox" class="hidden p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-800 font-medium"></div>
+
+                <form id="loginForm" onsubmit="handleLoginSubmit(event)" class="space-y-4" novalidate>
+                    <div>
+                        <label class="block text-xs font-semibold text-[#472D1F] mb-1.5">Email or Username</label>
+                        <input type="text" id="loginIdentifier" required placeholder="Enter your username or email" autocomplete="username" maxlength="150"
+                               class="w-full px-4 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5] text-xs text-[#472D1F] focus:outline-none focus:ring-2 focus:ring-[#8B5D3C]">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-[#472D1F] mb-1.5">Password</label>
+                        <div class="relative">
+                            <input type="password" id="loginPassword" required placeholder="Enter your password" autocomplete="current-password"
+                                   class="w-full pl-4 pr-10 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5] text-xs text-[#472D1F] focus:outline-none focus:ring-2 focus:ring-[#8B5D3C]">
+                            <button type="button" aria-label="Show or hide password" onclick="togglePass('loginPassword', 'loginEye')" class="absolute right-3 top-2.5 text-[#6F472F]">
+                                <i id="loginEye" data-lucide="eye" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-between text-xs">
+                        <label class="inline-flex items-center gap-2 text-[#6F472F] cursor-pointer">
+                            <input type="checkbox" id="loginRemember" class="rounded border-[#E5D5C5] text-[#8B5D3C]">
+                            <span>Remember me</span>
+                        </label>
+                        <button type="button" onclick="toggleForgotForm()"
+                                class="text-[#8B5D3C] hover:underline font-medium">
+                            Forgot password?
+                        </button>
+                    </div>
+
+                    <button type="submit" class="w-full py-3 rounded-xl bg-[#8B5D3C] hover:bg-[#6F472F] text-[#FAF7F2] text-xs font-semibold transition shadow-sm">
+                        Login
+                    </button>
+                </form>
+
+                <!-- Forgot password (inline, real flow) -->
+                <div id="forgotPanel" class="hidden p-4 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5] space-y-3">
+                    <p class="text-xs font-bold text-[#8B5D3C]">Reset your password</p>
+                    <p class="text-[11px] text-[#6F472F]">Enter the email address of your account and we will send you a single-use reset link (valid for 30 minutes).</p>
+                    <div id="forgotMsgBox" class="hidden"></div>
+                    <form id="forgotForm" onsubmit="handleForgotSubmit(event)" class="space-y-2.5" novalidate>
+                        <label for="forgotEmail" class="block text-[11px] font-semibold text-[#472D1F]">Email address</label>
+                        <input type="email" id="forgotEmail" required maxlength="150" autocomplete="email" placeholder="you@example.com"
+                               class="w-full px-4 py-2.5 rounded-xl bg-white border border-[#E5D5C5] text-xs text-[#472D1F] focus:outline-none focus:ring-2 focus:ring-[#8B5D3C]">
+                        <div class="flex gap-2">
+                            <button type="submit" class="px-4 py-2 rounded-xl bg-[#472D1F] text-[#FAF7F2] text-xs font-semibold hover:bg-[#6F472F] transition">Send reset link</button>
+                            <button type="button" onclick="toggleForgotForm(false)" class="px-4 py-2 rounded-xl bg-white border border-[#E5D5C5] text-xs font-semibold text-[#472D1F] hover:bg-[#F2EAE1] transition">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="pt-3 border-t border-[#E5D5C5] text-center space-y-3 text-xs">
+                    <p class="text-[#6F472F]">
+                        Don't have an account?
+                        <button type="button" onclick="navigateTo('register')" class="text-[#8B5D3C] font-semibold hover:underline">Sign up as a Member</button>
+                    </p>
+                    <button type="button" onclick="continueAsGuest()" class="w-full py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5] text-[#472D1F] hover:bg-[#F2EAE1] font-semibold transition">
+                        Continue as Guest
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             VIEW 3: REGISTRATION PAGE (Strictly assigns MEMBER role)
+             =================================================================== -->
+        <div id="view-register" class="view-section hidden flex-1 flex items-center justify-center p-4 sm:p-10">
+            <div class="w-full max-w-md heritage-card bg-white p-7 sm:p-9 space-y-5">
+                <div class="text-center space-y-1.5">
+                    <div class="inline-flex w-11 h-11 rounded-2xl bg-[#8B5D3C] text-[#FAF7F2] items-center justify-center font-serif font-bold text-xl">
+                        T
+                    </div>
+                    <h2 class="text-2xl font-bold text-[#472D1F] font-serif">Member Registration</h2>
+                    <p class="text-xs text-[#6F472F]">New accounts automatically receive the MEMBER role</p>
+                </div>
+
+                <div id="regErrorBox" class="hidden p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-800 font-medium"></div>
+
+                <form onsubmit="handleRegisterSubmit(event)" class="space-y-3.5 text-xs" novalidate>
+                    <div>
+                        <label class="block font-semibold text-[#472D1F] mb-1">Full Name *</label>
+                        <input type="text" id="regFullName" required placeholder="e.g. Juanita Santos"
+                               class="w-full px-4 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-[#472D1F] mb-1">Username *</label>
+                        <input type="text" id="regUsername" required placeholder="e.g. juanita_weaver (3-30: letters, numbers, _)" autocomplete="username" maxlength="30"
+                               class="w-full px-4 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-[#472D1F] mb-1">Email Address *</label>
+                        <input type="email" id="regEmail" required placeholder="e.g. juanita@university.edu.ph"
+                               class="w-full px-4 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]">
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-[#472D1F] mb-1">Password *</label>
+                        <div class="relative">
+                            <input type="password" id="regPassword" required placeholder="At least 8 characters, with a letter and a number" autocomplete="new-password" maxlength="72"
+                                   class="w-full pl-4 pr-10 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]">
+                            <button type="button" aria-label="Show or hide password" onclick="togglePass('regPassword', 'regEye')" class="absolute right-3 top-2.5 text-[#6F472F]">
+                                <i id="regEye" data-lucide="eye" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-[#472D1F] mb-1">Confirm Password *</label>
+                        <input type="password" id="regConfirmPassword" required placeholder="Re-enter password" autocomplete="new-password" maxlength="72"
+                               class="w-full px-4 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]">
+                    </div>
+
+                    <button type="submit" class="w-full py-3 rounded-xl bg-[#8B5D3C] hover:bg-[#6F472F] text-[#FAF7F2] font-semibold transition shadow-sm">
+                        Sign Up as Member
+                    </button>
+                </form>
+
+                <div class="pt-3 border-t border-[#E5D5C5] text-center space-y-2 text-xs">
+                    <p class="text-[#6F472F]">
+                        Already have an account?
+                        <button type="button" onclick="navigateTo('login')" class="text-[#8B5D3C] font-semibold hover:underline">Log In</button>
+                    </p>
+                    <button type="button" onclick="continueAsGuest()" class="text-[#6F472F] hover:text-[#472D1F] underline">
+                        Continue as Guest
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             VIEW 4: HOME PAGE (Main Browsing Page + 4 Featured Tribes)
+             =================================================================== -->
+        <div id="view-home" class="view-section hidden flex-1">
+            <main class="max-w-7xl mx-auto px-4 sm:px-8 py-10 space-y-12">
+                <!-- Welcome Banner -->
+                <section class="heritage-card p-7 sm:p-10 bg-gradient-to-br from-white to-[#F2EAE1]/60 space-y-5">
+                    <div class="flex flex-wrap items-center justify-between gap-3">
+                        <span id="homeWelcomeBadge" class="px-3.5 py-1 rounded-full bg-[#F2EAE1] text-[#8B5D3C] text-xs font-semibold border border-[#E5D5C5]">
+                            Welcome to the Archive
+                        </span>
+                        <div id="homeRoleActions" class="flex flex-wrap items-center gap-2"></div>
+                    </div>
+
+                    <div class="max-w-3xl space-y-3">
+                        <h2 class="text-3xl sm:text-4xl font-bold text-[#472D1F] font-serif">
+                            Tribal Weave Archive of the Philippines
+                        </h2>
+                        <p class="text-sm sm:text-base text-[#6F472F] leading-relaxed">
+                            Philippine Indigenous weaving is a living testament to ancestral geometry, botanical dyeing, and spiritual devotion. Across highland rice terraces, volcanic islands, and upland lakes, master weavers transform abaca, native cotton, inner tree bark, and pandan leaves into sacred cultural texts.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Four Featured Tribes: 1. T'boli, 2. Ifugao, 3. Yakan, 4. Maranao -->
+                <section class="space-y-6">
+                    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-[#A37350]">Featured Ethnolinguistic Pillars</span>
+                            <h3 class="text-2xl sm:text-3xl font-bold text-[#472D1F] font-serif">
+                                Four Featured Indigenous Tribes
+                            </h3>
+                        </div>
+                        <button onclick="navigateTo('weaves')" class="text-xs font-semibold text-[#8B5D3C] hover:text-[#472D1F] inline-flex items-center gap-1">
+                            <span>Browse All Weaving Records</span>
+                            <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
+                        </button>
+                    </div>
+
+                    <div id="homeFeaturedTribesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <!-- Populated dynamically -->
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- ===================================================================
+             VIEW 5: TRIBES PAGE (4 Featured Tribes Directory)
+             =================================================================== -->
+        <div id="view-tribes" class="view-section hidden flex-1">
+            <main class="max-w-7xl mx-auto px-4 sm:px-8 py-10 space-y-8">
+                <div class="max-w-3xl space-y-2">
+                    <span class="text-xs font-bold uppercase tracking-widest text-[#A37350]">Ethnolinguistic Directory</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-[#472D1F] font-serif">Featured Indigenous Tribes</h2>
+                    <p class="text-sm text-[#6F472F] leading-relaxed">
+                        Select any of the four featured tribes below to explore their history, cultural background, traditional practices, and associated weaving collection.
+                    </p>
+                </div>
+
+                <div id="tribesPageGrid" class="grid grid-cols-1 md:grid-cols-2 gap-7">
+                    <!-- Populated dynamically -->
+                </div>
+            </main>
+        </div>
+
+        <!-- ===================================================================
+             VIEW 6: TRIBE DETAILS PAGE (Section A: About + Section B: Weaves)
+             =================================================================== -->
+        <div id="view-tribe-details" class="view-section hidden flex-1">
+            <main class="max-w-7xl mx-auto px-4 sm:px-8 py-10 space-y-12">
+                <div>
+                    <button onclick="navigateTo('tribes')" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-[#E5D5C5] text-xs font-semibold text-[#472D1F] hover:bg-[#F2EAE1] transition">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        <span>Back to Tribes</span>
+                    </button>
+                </div>
+
+                <!-- SECTION A: ABOUT THE TRIBE -->
+                <section id="tribeDetailSectionA" class="heritage-card p-6 sm:p-10 space-y-8"></section>
+
+                <!-- SECTION B: TRADITIONAL WEAVES -->
+                <section class="space-y-6">
+                    <div class="border-b border-[#E5D5C5] pb-3 flex items-center justify-between">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-[#8B5D3C]">Section B &bull; Traditional Weaves</span>
+                            <h3 id="tribeWeavesHeading" class="text-2xl sm:text-3xl font-bold text-[#472D1F] font-serif">Associated Weaving Traditions</h3>
+                        </div>
+                        <span id="tribeWeavesCountBadge" class="px-3 py-1 rounded-xl bg-[#F2EAE1] text-[#472D1F] text-xs font-semibold"></span>
+                    </div>
+
+                    <div id="tribeDetailWeavesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                </section>
+            </main>
+        </div>
+
+        <!-- ===================================================================
+             VIEW 7: WEAVES PAGE (Pinterest Masonry Gallery + Search & Filters)
+             =================================================================== -->
+        <div id="view-weaves" class="view-section hidden flex-1">
+            <!-- Sticky Search & Filter Bar -->
+            <section class="sticky top-20 z-30 bg-[#FAF7F2]/95 backdrop-blur-md py-4 border-b border-[#E5D5C5] px-4 sm:px-8 shadow-sm">
+                <div class="max-w-7xl mx-auto space-y-3">
+                    <div class="relative max-w-2xl mx-auto">
+                        <i data-lucide="search" class="absolute left-4 top-3.5 w-4 h-4 text-[#8B5D3C]"></i>
+                        <input type="text" id="searchInput" oninput="debouncedGallery()" aria-label="Search weaves" autocomplete="off"
+                               placeholder="Search by weave name, tribe, or region..."
+                               class="w-full pl-11 pr-4 py-3 rounded-2xl bg-white border border-[#E5D5C5] text-[#472D1F] text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-[#8B5D3C] shadow-xs">
+                    </div>
+
+                    <div class="flex flex-col md:flex-row justify-between gap-3 items-center">
+                        <!-- Region Filters -->
+                        <div class="flex flex-wrap justify-center gap-1.5" id="regionTabs">
+                            <button onclick="setRegionFilter('All')" data-region="All" class="reg-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold transition bg-[#8B5D3C] text-[#FAF7F2] shadow-sm">All Regions</button>
+                            <button onclick="setRegionFilter('Luzon')" data-region="Luzon" class="reg-btn px-3.5 py-1.5 rounded-xl text-xs font-medium transition bg-white border border-[#E5D5C5] text-[#472D1F] hover:bg-[#F2EAE1]">Luzon</button>
+                            <button onclick="setRegionFilter('Visayas & Mindoro')" data-region="Visayas & Mindoro" class="reg-btn px-3.5 py-1.5 rounded-xl text-xs font-medium transition bg-white border border-[#E5D5C5] text-[#472D1F] hover:bg-[#F2EAE1]">Visayas &amp; Mindoro</button>
+                            <button onclick="setRegionFilter('Mindanao & Sulu')" data-region="Mindanao & Sulu" class="reg-btn px-3.5 py-1.5 rounded-xl text-xs font-medium transition bg-white border border-[#E5D5C5] text-[#472D1F] hover:bg-[#F2EAE1]">Mindanao &amp; Sulu</button>
+                        </div>
+
+                        <!-- Craft Medium Filters -->
+                        <div class="flex flex-wrap justify-center gap-1.5" id="mediumTabs">
+                            <button onclick="setMediumFilter('All')" data-med="All" class="med-btn px-3.5 py-1.5 rounded-xl text-xs font-semibold transition bg-[#472D1F] text-[#FAF7F2] shadow-sm">All Mediums</button>
+                            <button onclick="setMediumFilter('Textile')" data-med="Textile" class="med-btn px-3.5 py-1.5 rounded-xl text-xs font-medium transition bg-white border border-[#E5D5C5] text-[#472D1F] hover:bg-[#F2EAE1]">Textile</button>
+                            <button onclick="setMediumFilter('Bark Cloth')" data-med="Bark Cloth" class="med-btn px-3.5 py-1.5 rounded-xl text-xs font-medium transition bg-white border border-[#E5D5C5] text-[#472D1F] hover:bg-[#F2EAE1]">Bark Cloth</button>
+                            <button onclick="setMediumFilter('Plaited Fiber')" data-med="Plaited Fiber" class="med-btn px-3.5 py-1.5 rounded-xl text-xs font-medium transition bg-white border border-[#E5D5C5] text-[#472D1F] hover:bg-[#F2EAE1]">Plaited Fiber</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <main class="max-w-7xl mx-auto px-4 sm:px-8 py-10">
+                <div class="flex flex-wrap justify-between items-center gap-3 mb-6">
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-bold text-[#472D1F] font-serif">Pinterest Masonry Weave Gallery</h2>
+                        <p class="text-xs text-[#6F472F]">Click any weave card to view its dedicated Individual Weave Details page.</p>
+                    </div>
+                    <span id="entryCount" class="text-xs font-semibold text-[#472D1F] bg-[#F2EAE1] border border-[#E5D5C5] px-3.5 py-1.5 rounded-xl">24 Entries Shown</span>
+                </div>
+
+                <div id="noResults" class="hidden text-center py-20 bg-white rounded-3xl border border-[#E5D5C5]">
+                    <p class="text-[#6F472F] text-sm">No matching weaving traditions found in this view.</p>
+                </div>
+
+                <div class="masonry-grid" id="weaveGrid"></div>
+            </main>
+        </div>
+
+        <!-- ===================================================================
+             VIEW 8: INDIVIDUAL WEAVE DETAILS PAGE
+             =================================================================== -->
+        <div id="view-weave-details" class="view-section hidden flex-1">
+            <main class="max-w-7xl mx-auto px-4 sm:px-8 py-10 space-y-8">
+                <div class="flex items-center justify-between">
+                    <button id="weaveDetailsBackBtn" onclick="navigateTo('weaves')" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white border border-[#E5D5C5] text-xs font-semibold text-[#472D1F] hover:bg-[#F2EAE1] transition">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        <span id="weaveDetailsBackLabel">Back to Weaves</span>
+                    </button>
+                    <span id="weaveDetailsCodeBadge" class="text-xs font-mono text-[#6F472F] bg-[#F2EAE1] px-3 py-1 rounded-lg border border-[#E5D5C5]"></span>
+                </div>
+
+                <section id="weaveDetailsContainer" class="heritage-card p-6 sm:p-10"></section>
+            </main>
+        </div>
+
+        <!-- ===================================================================
+             VIEW 9: USER PROFILE PAGE (User Info + My Contributions + LOGOUT)
+             =================================================================== -->
+        <div id="view-profile" class="view-section hidden flex-1">
+            <main class="max-w-7xl mx-auto px-4 sm:px-8 py-10 space-y-10">
+                <!-- SECTION A: USER INFORMATION -->
+                <section class="heritage-card p-6 sm:p-9 space-y-6">
+                    <div class="flex flex-wrap items-center justify-between gap-4 border-b border-[#E5D5C5] pb-4">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-[#A37350]">Section A &bull; Account Identity</span>
+                            <h2 class="text-2xl sm:text-3xl font-bold text-[#472D1F] font-serif">User Information</h2>
+                        </div>
+
+                        <!-- Role Dashboard Shortcuts & LOGOUT Button (Strictly Inside Profile Page) -->
+                        <div class="flex flex-wrap items-center gap-3">
+                            <div id="profileRoleActionBtns" class="flex flex-wrap gap-2"></div>
+                            <button type="button" onclick="confirmLogout()"
+                                    class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-rose-700 hover:bg-rose-800 text-white text-xs font-semibold transition shadow-sm">
+                                <i data-lucide="log-out" class="w-4 h-4"></i>
+                                <span>LOGOUT</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div id="profileUserInfoContent"></div>
+
+                    <!-- Account management cards (signed-in users only) -->
+                    <div id="profileAccountForms" class="hidden grid grid-cols-1 lg:grid-cols-2 gap-6 pt-2">
+                        <form id="profileEditForm" onsubmit="handleProfileUpdate(event)" class="p-5 rounded-2xl bg-[#FAF7F2] border border-[#E5D5C5] space-y-3.5 text-xs" novalidate>
+                            <h3 class="text-sm font-bold uppercase tracking-wider text-[#472D1F] font-serif">Edit Profile</h3>
+                            <div id="profileEditBox" class="hidden"></div>
+                            <div><label for="editFullName" class="block font-semibold text-[#472D1F] mb-1">Full Name *</label>
+                                <input type="text" id="editFullName" required maxlength="100" autocomplete="name" class="w-full px-4 py-2.5 rounded-xl bg-white border border-[#E5D5C5] text-[#472D1F] focus:outline-none focus:ring-2 focus:ring-[#8B5D3C]"></div>
+                            <div><label for="editEmail" class="block font-semibold text-[#472D1F] mb-1">Email Address *</label>
+                                <input type="email" id="editEmail" required maxlength="150" autocomplete="email" class="w-full px-4 py-2.5 rounded-xl bg-white border border-[#E5D5C5] text-[#472D1F] focus:outline-none focus:ring-2 focus:ring-[#8B5D3C]"></div>
+                            <button type="submit" class="px-5 py-2.5 rounded-xl bg-[#8B5D3C] hover:bg-[#6F472F] text-[#FAF7F2] font-semibold transition shadow-sm">Save Changes</button>
+                        </form>
+                        <form id="passwordForm" onsubmit="handleChangePassword(event)" class="p-5 rounded-2xl bg-[#FAF7F2] border border-[#E5D5C5] space-y-3.5 text-xs" novalidate>
+                            <h3 class="text-sm font-bold uppercase tracking-wider text-[#472D1F] font-serif">Change Password</h3>
+                            <div id="passwordBox" class="hidden"></div>
+                            <div><label for="curPassword" class="block font-semibold text-[#472D1F] mb-1">Current Password *</label>
+                                <input type="password" id="curPassword" required maxlength="72" autocomplete="current-password" class="w-full px-4 py-2.5 rounded-xl bg-white border border-[#E5D5C5] text-[#472D1F] focus:outline-none focus:ring-2 focus:ring-[#8B5D3C]"></div>
+                            <div><label for="newPassword" class="block font-semibold text-[#472D1F] mb-1">New Password *</label>
+                                <input type="password" id="newPassword" required maxlength="72" autocomplete="new-password" placeholder="At least 8 characters, with a letter and a number" class="w-full px-4 py-2.5 rounded-xl bg-white border border-[#E5D5C5] text-[#472D1F] focus:outline-none focus:ring-2 focus:ring-[#8B5D3C]"></div>
+                            <div><label for="newPassword2" class="block font-semibold text-[#472D1F] mb-1">Confirm New Password *</label>
+                                <input type="password" id="newPassword2" required maxlength="72" autocomplete="new-password" class="w-full px-4 py-2.5 rounded-xl bg-white border border-[#E5D5C5] text-[#472D1F] focus:outline-none focus:ring-2 focus:ring-[#8B5D3C]"></div>
+                            <button type="submit" class="px-5 py-2.5 rounded-xl bg-[#8B5D3C] hover:bg-[#6F472F] text-[#FAF7F2] font-semibold transition shadow-sm">Change Password</button>
+                        </form>
+                    </div>
+                </section>
+
+                <!-- SECTION B: MY CONTRIBUTIONS -->
+                <section class="heritage-card p-6 sm:p-9 space-y-6">
+                    <div class="flex flex-wrap items-center justify-between gap-2 border-b border-[#E5D5C5] pb-4">
+                        <div>
+                            <span class="text-xs font-bold uppercase tracking-widest text-[#A37350]">Section B &bull; Archival Submissions</span>
+                            <h3 class="text-2xl font-bold text-[#472D1F] font-serif">My Contributions</h3>
+                        </div>
+                        <span id="profileContributionCount" class="text-xs font-semibold text-[#6F472F] bg-[#F2EAE1] px-3 py-1 rounded-xl"></span>
+                    </div>
+
+                    <div id="profileContributionsList"></div>
+                </section>
+            </main>
+        </div>
+
+        <!-- ===================================================================
+             VIEW 10: MEMBER DASHBOARD
+             =================================================================== -->
+        <div id="view-member-dashboard" class="view-section hidden flex-1">
+            <main class="max-w-7xl mx-auto px-4 sm:px-8 py-10 space-y-8">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-[#A37350]">Contributor Workspace</span>
+                        <h2 class="text-3xl font-bold text-[#472D1F] font-serif">Member Dashboard</h2>
+                    </div>
+                    <button onclick="openSubmitRecordForm()" class="inline-flex items-center gap-2 px-5 py-3 rounded-2xl bg-[#8B5D3C] hover:bg-[#6F472F] text-[#FAF7F2] text-xs font-semibold shadow-sm transition">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        <span>Submit New Record</span>
+                    </button>
+                </div>
+
+                <!-- Member Status Tabs -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-4" id="memberStatCards"></div>
+
+                <!-- Member Submissions Table -->
+                <section class="heritage-card overflow-hidden">
+                    <div class="p-6 border-b border-[#E5D5C5] flex items-center justify-between">
+                        <h3 class="text-lg font-bold text-[#472D1F] font-serif" id="memberTableHeading">My Submissions</h3>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead>
+                                <tr class="bg-[#F2EAE1] text-[#472D1F] uppercase tracking-wider font-bold border-b border-[#E5D5C5]">
+                                    <th class="py-3.5 px-5">Specimen</th>
+                                    <th class="py-3.5 px-5">Tribe &amp; Region</th>
+                                    <th class="py-3.5 px-5">Medium</th>
+                                    <th class="py-3.5 px-5">Status</th>
+                                    <th class="py-3.5 px-5">Admin Feedback</th>
+                                    <th class="py-3.5 px-5 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="memberSubmissionsTableBody" class="divide-y divide-[#E5D5C5]"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- ===================================================================
+             VIEW 11: SUBMIT / EDIT WEAVING RECORD FORM
+             =================================================================== -->
+        <div id="view-submit-record" class="view-section hidden flex-1">
+            <main class="max-w-4xl mx-auto px-4 sm:px-8 py-10 space-y-6">
+                <div>
+                    <button onclick="returnFromSubmitForm()" class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white border border-[#E5D5C5] text-xs font-semibold text-[#472D1F] hover:bg-[#F2EAE1]">
+                        <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                        <span>Back to Dashboard</span>
+                    </button>
+                </div>
+
+                <section class="heritage-card p-6 sm:p-10 space-y-6">
+                    <div class="border-b border-[#E5D5C5] pb-4 space-y-1">
+                        <span class="text-xs font-bold uppercase tracking-widest text-[#8B5D3C]">IPRA / FPIC Field Documentation</span>
+                        <h2 id="submitFormHeading" class="text-2xl sm:text-3xl font-bold text-[#472D1F] font-serif">Submit New Weaving Record</h2>
+                        <p id="submitRoleNote" class="text-xs text-[#6F472F]">
+                            Member submissions are saved with <strong>PENDING</strong> status and must be reviewed and approved by an Admin before appearing in the public archive.
+                        </p>
+                    </div>
+
+                    <form id="recordForm" onsubmit="handleRecordSubmission(event)" class="space-y-4 text-xs">
+                        <div id="submitErrorBox" class="hidden"></div>
+                        <input type="hidden" id="subEditId" value="">
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-semibold text-[#472D1F] mb-1">Ethnolinguistic Group / Tribe *</label>
+                                <input type="text" id="subTribe" required list="tribeOptionsList" placeholder="e.g. T'boli, Ifugao, Yakan, Maranao"
+                                       class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]">
+                                <datalist id="tribeOptionsList">
+                                    <option value="T'boli">
+                                    <option value="Ifugao">
+                                    <option value="Yakan">
+                                    <option value="Maranao">
+                                </datalist>
+                            </div>
+
+                            <div>
+                                <label class="block font-semibold text-[#472D1F] mb-1">Native Weave Name *</label>
+                                <input type="text" id="subWeaveName" required placeholder="e.g. Bangala Dream Ikat"
+                                       class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]">
+                            </div>
+
+                            <div>
+                                <label class="block font-semibold text-[#472D1F] mb-1">Region *</label>
+                                <select id="subRegion" class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]">
+                                    <option value="Luzon">Luzon</option>
+                                    <option value="Visayas & Mindoro">Visayas &amp; Mindoro</option>
+                                    <option value="Mindanao & Sulu">Mindanao &amp; Sulu</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block font-semibold text-[#472D1F] mb-1">Craft Medium *</label>
+                                <select id="subMedium" class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]">
+                                    <option value="Textile">Textile</option>
+                                    <option value="Bark Cloth">Bark Cloth</option>
+                                    <option value="Plaited Fiber">Plaited Fiber</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block font-semibold text-[#472D1F] mb-1">Geographic Location *</label>
+                                <input type="text" id="subLocation" required placeholder="e.g. Lake Sebu, South Cotabato"
+                                       class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]">
+                            </div>
+
+                            <div>
+                                <label class="block font-semibold text-[#472D1F] mb-1">Vulnerability Status *</label>
+                                <select id="subStatusVuln" class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]">
+                                    <option value="Sustained">Sustained</option>
+                                    <option value="Vulnerable">Vulnerable</option>
+                                    <option value="Endangered">Endangered</option>
+                                    <option value="Critically Endangered">Critically Endangered</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label class="block font-semibold text-[#472D1F] mb-1">Fiber / Material *</label>
+                                <input type="text" id="subFiber" required placeholder="e.g. Hand-scraped wild abaca"
+                                       class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]">
+                            </div>
+
+                            <div>
+                                <label class="block font-semibold text-[#472D1F] mb-1">Natural Dyes *</label>
+                                <input type="text" id="subDyes" required placeholder="e.g. Klubi root, Knalum leaves & river mud"
+                                       class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold text-[#472D1F] mb-1">Loom / Weaving Technique *</label>
+                            <input type="text" id="subLoom" required placeholder="e.g. Backstrap Tension Loom"
+                                   class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]">
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold text-[#472D1F] mb-1">Cultural Significance *</label>
+                            <textarea id="subCulture" rows="3" required maxlength="2000" placeholder="Describe the ritual significance and cultural meaning of this weave..."
+                                      class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]"></textarea>
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold text-[#472D1F] mb-1">Motifs and Patterns <span class="font-normal text-[#6F472F]">(optional)</span></label>
+                            <textarea id="subMotifs" rows="3" maxlength="2000" placeholder="Describe the patterns and sacred motifs, e.g. Bangala (frog), Kleng (crab)..."
+                                      class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]"></textarea>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-semibold text-[#472D1F] mb-1">Documentation Source *</label>
+                                <input type="text" id="subDocSource" required placeholder="e.g. Field interview with Master Weaver & NCIP Monograph"
+                                       class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]">
+                            </div>
+                            <div>
+                                <label class="block font-semibold text-[#472D1F] mb-1">Community Consent / FPIC Documentation *</label>
+                                <input type="text" id="subFpic" required placeholder="e.g. Council of Elders Resolution #2026-04"
+                                       class="w-full px-3.5 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5]">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block font-semibold text-[#472D1F] mb-1">Specimen Image Upload</label>
+                            <input type="file" id="subImageFile" accept="image/jpeg,image/png,image/webp,image/gif"
+                                   class="w-full px-3.5 py-2 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5] file:mr-4 file:py-1.5 file:px-3.5 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#8B5D3C] file:text-[#FAF7F2]">
+                            <p class="text-[11px] text-[#6F472F] mt-1">JPG, PNG, WEBP or GIF, up to 3 MB. Leave empty to keep the current image.</p>
+                            <div id="subImagePreviewWrap" class="hidden mt-3 flex items-center gap-3">
+                                <img id="subImagePreview" alt="Selected specimen preview" class="w-24 h-24 object-cover rounded-xl border border-[#E5D5C5] bg-[#F2EAE1]">
+                                <span id="subImageNote" class="text-[11px] text-[#6F472F]"></span>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-[#8B5D3C] hover:bg-[#6F472F] text-[#FAF7F2] font-semibold text-xs transition shadow-sm">
+                            Save &amp; Submit Record
+                        </button>
+                    </form>
+                </section>
+            </main>
+        </div>
+
+        <!-- ===================================================================
+             VIEW 12: ADMIN DASHBOARD
+             =================================================================== -->
+        <div id="view-admin-dashboard" class="view-section hidden flex-1">
+            <main class="max-w-7xl mx-auto px-4 sm:px-8 py-10 space-y-12">
+                <div class="flex flex-wrap items-center justify-between gap-4">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-widest text-[#8B5D3C]">Curator Governance Console</span>
+                        <h2 class="text-3xl font-bold text-[#472D1F] font-serif">Admin Dashboard</h2>
+                    </div>
+                    <button onclick="openSubmitRecordForm()" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#8B5D3C] hover:bg-[#6F472F] text-[#FAF7F2] text-xs font-semibold">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        <span>Add Archival Record</span>
+                    </button>
+                </div>
+
+                <!-- 1. Dashboard Overview Counters -->
+                <section id="adminOverviewStats" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4"></section>
+
+                <!-- 2. Pending Approvals Queue -->
+                <section class="heritage-card p-6 sm:p-8 space-y-6">
+                    <div class="border-b border-[#E5D5C5] pb-4 flex items-center justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-[#472D1F] font-serif">Pending Approvals</h3>
+                            <p class="text-xs text-[#6F472F]">Review member submissions, inspect documentation, and Approve or Reject with feedback.</p>
+                        </div>
+                        <span id="adminPendingBadge" class="status-badge status-PENDING">0 Pending</span>
+                    </div>
+                    <div id="adminPendingList" class="space-y-6"></div>
+                </section>
+
+                <!-- 3. Published Records (Edit & Delete) -->
+                <section class="heritage-card overflow-hidden">
+                    <div class="p-6 border-b border-[#E5D5C5] flex items-center justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-[#472D1F] font-serif">Published Records</h3>
+                            <p class="text-xs text-[#6F472F]">Edit or delete approved records displayed in the public archive.</p>
+                        </div>
+                    </div>
+                    <div class="overflow-x-auto max-h-[460px]">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead class="sticky top-0 bg-[#F2EAE1] text-[#472D1F] uppercase tracking-wider font-bold border-b border-[#E5D5C5]">
+                                <tr>
+                                    <th class="py-3.5 px-5">Code &amp; Weave</th>
+                                    <th class="py-3.5 px-5">Tribe</th>
+                                    <th class="py-3.5 px-5">Region &amp; Medium</th>
+                                    <th class="py-3.5 px-5 text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminPublishedTableBody" class="divide-y divide-[#E5D5C5]"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 4. Member Management -->
+                <section class="heritage-card overflow-hidden">
+                    <div class="p-6 border-b border-[#E5D5C5]">
+                        <h3 class="text-xl font-bold text-[#472D1F] font-serif">Member Management</h3>
+                        <p class="text-xs text-[#6F472F]">View registered members and their contribution statuses.</p>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse text-xs">
+                            <thead class="bg-[#F2EAE1] text-[#472D1F] uppercase tracking-wider font-bold border-b border-[#E5D5C5]">
+                                <tr>
+                                    <th class="py-3.5 px-5">Full Name</th>
+                                    <th class="py-3.5 px-5">Username</th>
+                                    <th class="py-3.5 px-5">Email</th>
+                                    <th class="py-3.5 px-5">Date Joined</th>
+                                    <th class="py-3.5 px-5">Contributions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminMembersTableBody" class="divide-y divide-[#E5D5C5]"></tbody>
+                        </table>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- ===================================================================
+             VIEW: RESET PASSWORD (opened from the emailed link  #/reset?token=...)
+             =================================================================== -->
+        <div id="view-reset" class="view-section hidden flex-1 flex items-center justify-center p-4 sm:p-10">
+            <div class="w-full max-w-md heritage-card bg-white p-7 sm:p-9 space-y-6">
+                <div class="text-center space-y-2">
+                    <div class="inline-flex w-12 h-12 rounded-2xl bg-[#8B5D3C] text-[#FAF7F2] items-center justify-center font-serif font-bold text-2xl shadow-sm">T</div>
+                    <h2 class="text-2xl font-bold text-[#472D1F] font-serif">Set New Password</h2>
+                    <p class="text-xs text-[#6F472F]">Choose a new password for your account.</p>
+                </div>
+                <div id="resetStatusBox" class="hidden"></div>
+                <form id="resetForm" onsubmit="handleResetSubmit(event)" class="hidden space-y-4 text-xs" novalidate>
+                    <div>
+                        <label for="resetPassword" class="block font-semibold text-[#472D1F] mb-1">New Password *</label>
+                        <div class="relative">
+                            <input type="password" id="resetPassword" required maxlength="72" autocomplete="new-password" placeholder="At least 8 characters, with a letter and a number"
+                                   class="w-full pl-4 pr-10 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5] text-xs text-[#472D1F] focus:outline-none focus:ring-2 focus:ring-[#8B5D3C]">
+                            <button type="button" aria-label="Show or hide password" onclick="togglePass('resetPassword', 'resetEye')" class="absolute right-3 top-2.5 text-[#6F472F]">
+                                <i id="resetEye" data-lucide="eye" class="w-4 h-4"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="resetConfirm" class="block font-semibold text-[#472D1F] mb-1">Confirm New Password *</label>
+                        <input type="password" id="resetConfirm" required maxlength="72" autocomplete="new-password" placeholder="Re-enter password"
+                               class="w-full px-4 py-2.5 rounded-xl bg-[#FAF7F2] border border-[#E5D5C5] text-xs text-[#472D1F] focus:outline-none focus:ring-2 focus:ring-[#8B5D3C]">
+                    </div>
+                    <button type="submit" class="w-full py-3 rounded-xl bg-[#8B5D3C] hover:bg-[#6F472F] text-[#FAF7F2] font-semibold transition shadow-sm">Update Password</button>
+                </form>
+                <div class="pt-3 border-t border-[#E5D5C5] text-center text-xs">
+                    <button type="button" onclick="navigateTo('login')" class="text-[#8B5D3C] font-semibold hover:underline">Back to Log In</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             VIEW: PAGE NOT FOUND
+             =================================================================== -->
+        <div id="view-notfound" class="view-section hidden flex-1 flex items-center justify-center p-6">
+            <div class="max-w-md w-full text-center heritage-card bg-white p-10 space-y-4">
+                <p class="text-5xl font-bold text-[#8B5D3C] font-serif">404</p>
+                <h2 class="text-2xl font-bold text-[#472D1F] font-serif">Page not found</h2>
+                <p class="text-xs text-[#6F472F]">The page you are looking for does not exist or has moved.</p>
+                <button type="button" onclick="navigateTo('home')" class="px-6 py-3 rounded-2xl bg-[#8B5D3C] hover:bg-[#6F472F] text-[#FAF7F2] text-xs font-semibold transition shadow-sm">Go to Home</button>
+            </div>
+        </div>
+
+        <!-- Shared Footer -->
+        <footer class="bg-white border-t border-[#E5D5C5] py-8 px-4 sm:px-8 mt-auto text-center text-xs text-[#6F472F]">
+            <p>Tribal Weave Archive of the Philippines &bull; Preserving Indigenous Textile Heritage &amp; Cultural Ethics</p>
+        </footer>
+    </div>
+
+    <script src="assets/js/api.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

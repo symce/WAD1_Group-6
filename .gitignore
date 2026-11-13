@@ -1,0 +1,8 @@
+# The SQLite database (database/app.sqlite) IS committed on purpose (course requirement).
+storage/sessions/
+storage/mail_outbox.log
+uploads/*
+!uploads/.gitkeep
+!uploads/.htaccess
+.DS_Store
+Thumbs.db

@@ -1,0 +1,132 @@
+:root {
+    --bg-cream: #FAF7F2;
+    --bg-beige: #F2EAE1;
+    --border-sand: #E5D5C5;
+    --accent-ochre: #A37350;
+    --heritage-brown: #8B5D3C;
+    --deep-earth: #6F472F;
+    --dark-espresso: #472D1F;
+}
+
+body {
+    background-color: var(--bg-beige);
+    color: var(--dark-espresso);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+h1, h2, h3, h4, .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+}
+
+/* Indigenous Textile Geometric Top Accent Strip */
+.weave-pattern-strip {
+    height: 6px;
+    width: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        #472D1F 0px,
+        #472D1F 16px,
+        #8B5D3C 16px,
+        #8B5D3C 32px,
+        #A37350 32px,
+        #A37350 48px,
+        #E5D5C5 48px,
+        #E5D5C5 64px
+    );
+}
+
+/* Navigation Links (Strictly 4 Items: HOME, WEAVES, TRIBES, PROFILE) */
+.nav-link {
+    padding: 0.55rem 1.15rem;
+    border-radius: 0.85rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--deep-earth);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.nav-link:hover {
+    background-color: var(--bg-beige);
+    color: var(--dark-espresso);
+}
+
+.nav-link.active {
+    background-color: var(--heritage-brown);
+    color: var(--bg-cream);
+    box-shadow: 0 2px 6px rgba(71, 45, 31, 0.18);
+}
+
+/* Pinterest-Inspired Masonry Layout */
+.masonry-grid {
+    column-count: 1;
+    column-gap: 1.75rem;
+}
+@media (min-width: 640px) { .masonry-grid { column-count: 2; } }
+@media (min-width: 1024px) { .masonry-grid { column-count: 3; } }
+@media (min-width: 1280px) { .masonry-grid { column-count: 4; } }
+
+.masonry-item {
+    break-inside: avoid;
+    margin-bottom: 1.75rem;
+}
+
+/* Heritage Card Styling */
+.heritage-card {
+    background-color: #FFFFFF;
+    border: 1px solid var(--border-sand);
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 20px -4px rgba(71, 45, 31, 0.06);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.heritage-card-hover:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px -6px rgba(71, 45, 31, 0.12);
+}
+
+/* Submission Status Badges */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+.status-APPROVED { background-color: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; }
+.status-PENDING  { background-color: #FFFBEB; color: #92400E; border: 1px solid #FDE68A; }
+.status-REJECTED { background-color: #FEF2F2; color: #991B1B; border: 1px solid #FECACA; }
+    
+
+/* ------------------------------------------------------------------
+   Additions for the PHP/SQLite version
+   ------------------------------------------------------------------ */
+.toast-banner { border: 1px solid transparent; }
+.toast-success { background-color: #ECFDF5; border-color: #A7F3D0; color: #064E3B; }
+.toast-error   { background-color: #FEF2F2; border-color: #FECACA; color: #991B1B; }
+
+.msg-box     { padding: 0.875rem; border-radius: 0.75rem; border: 1px solid; font-size: 0.75rem; font-weight: 500; }
+.msg-error   { background-color: #FFF1F2; border-color: #FECDD3; color: #9F1239; }
+.msg-success { background-color: #ECFDF5; border-color: #A7F3D0; color: #065F46; }
+
+.field-error   { color: #BE123C; font-size: 0.6875rem; font-weight: 500; margin-top: 0.25rem; }
+.input-invalid { border-color: #E11D48 !important; }
+
+button:disabled, .is-busy { opacity: 0.6; cursor: not-allowed; }
+
+.spinner {
+    width: 18px; height: 18px; flex: none;
+    border: 2px solid #E5D5C5; border-top-color: #8B5D3C; border-radius: 50%;
+    animation: twa-spin 0.8s linear infinite;
+}
+@keyframes twa-spin { to { transform: rotate(360deg); } }
+
+[data-action] { cursor: pointer; }
+.heritage-card:focus-visible, [data-action]:focus-visible { outline: 2px solid #8B5D3C; outline-offset: 2px; }
+
