@@ -4,15 +4,14 @@ A dynamic web application that preserves and presents Philippine Indigenous text
 
 **WAD 1 Final Project**
 
-**Group <NUMBER>:** <MEMBER NAME 1>, <MEMBER NAME 2>, <MEMBER NAME 3>, <MEMBER NAME 4>
+**Group 6:** 
+1. Banania, Ian 
+2. Borromeo, Nicole Irrah
+3. Castillo, Ashley
+4. Cenon, Symeon
+5. Macaubos, Carl Andrae
 
 ---
-
-## Requirements
-
-- PHP 8.0 or newer with the extensions `pdo_sqlite`, `mbstring` and `fileinfo` (all enabled by default in XAMPP)
-- A modern browser with internet access (Tailwind CSS, Lucide icons and Google Fonts load from their CDNs)
-- No Composer, no Node, no database server: the SQLite database is a single file (`database/app.sqlite`)
 
 ## Run it
 
@@ -36,19 +35,18 @@ All URLs in the code are relative, so the app works from the site root or from a
 
 **setup.php**
 
-| Command | What it does |
-|---|---|
-| `php setup.php` | Creates any missing tables and seeds an empty database. Never wipes existing data. Safe to run repeatedly. |
-| `php setup.php --reset` | CLI only: deletes the database file and rebuilds it from scratch. |
-| `http://localhost:8000/setup.php` | Same as the first command, from the browser. |
+| Command                           | What it does                                                                                               |
+|-----------------------------------|------------------------------------------------------------------------------------------------------------|
+| `php setup.php`                   | Creates any missing tables and seeds an empty database. Never wipes existing data. Safe to run repeatedly. |
+| `php setup.php --reset`           | CLI only: deletes the database file and rebuilds it from scratch.                                          |
+| `http://localhost:8000/setup.php` | Same as the first command, from the browser.                                                               |
 
 **Images:** the seed data refers to image files such as `Tnalak.png`, `Inabel.png`, `Seputangan.png`, `Maranao.png`, `mandaya.jpg`. Keep them **in the project root next to `index.html`** (the same place as in the original frontend). If a file is missing, the page shows a built-in SVG textile placeholder instead of a broken image. Member uploads are stored in `uploads/`.
 
 ## Demo accounts
 
-| Role | Username | Password |
-|---|---|---|
-| Admin | `admin` | `Admin@123` |
+|--------|----------|--------------|
+| Admin  | `admin`  | `Admin@123`  |
 | Member | `member` | `Member@123` |
 
 These accounts are created by `setup.php` and stored **hashed**. They are documented here only; no credentials exist in the HTML or JavaScript. **Change both passwords (Profile, Change Password) before any real deployment.**
