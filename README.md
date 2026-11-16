@@ -19,20 +19,9 @@ Built with HTML, CSS (Tailwind CDN), vanilla JavaScript (fetch API), PHP, and an
 
 **Requirements:** PHP 8.0 or newer with `pdo_sqlite`, `mbstring` and `fileinfo` (all included in XAMPP). Internet access is needed for the Tailwind, icon and font CDNs.
 
-**Option A: PHP built-in server**
-
-1. Open a terminal in the project folder.
-2. (Optional) Create/seed the database: `php setup.php`. A ready-made `database/app.sqlite` is already included.
-3. Start the server: `php -S localhost:8000 router.php`
-4. Open <http://localhost:8000> in your browser.
-
-**Option B: XAMPP**
-
 1. Copy the project folder into `C:\xampp\htdocs\`.
 2. Start Apache in the XAMPP control panel.
 3. Open `http://localhost/<folder-name>/`.
-
-Keep the weave images (`Tnalak.png`, `Inabel.png`, etc.) in the project folder next to `index.html`.
 
 **Demo accounts** (change these passwords for any real use):
 
@@ -43,5 +32,3 @@ Keep the weave images (`Tnalak.png`, `Inabel.png`, etc.) in the project folder n
 
 To rebuild the database from scratch: `php setup.php --reset`.
 Password-reset emails are simulated and written to `storage/mail_outbox.log`.
-
-More detail on the database, authentication and workflow is in `HOW_IT_WORKS.md`.
